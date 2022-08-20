@@ -7,6 +7,7 @@ import requests
 import config
 import pickle
 import io
+import os
 import torch
 from torchvision import transforms
 from PIL import Image
