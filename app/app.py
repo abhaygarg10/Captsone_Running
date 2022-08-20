@@ -11,7 +11,7 @@ import os
 import torch
 from torchvision import transforms
 from PIL import Image
-from utils.model import ResNet9
+from utils.model import Mymodel
 # ==============================================================================================
 
 # -------------------------LOADING THE TRAINED MODELS -----------------------------------------------
@@ -59,7 +59,7 @@ disease_classes = ['Apple___Apple_scab',
                    'Tomato___healthy']
 
 disease_model_path = 'models/plant_disease_model.pth'
-disease_model = ResNet9(3, len(disease_classes))
+disease_model = Mymodel(3, len(disease_classes))
 disease_model.load_state_dict(torch.load(
     disease_model_path, map_location=torch.device('cpu')))
 disease_model.eval()
