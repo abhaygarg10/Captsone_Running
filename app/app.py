@@ -12,6 +12,7 @@ import torch
 from torchvision import transforms
 from PIL import Image
 from utils.model import Mymodel
+import json
 # ==============================================================================================
 
 # -------------------------LOADING THE TRAINED MODELS -----------------------------------------------
@@ -166,26 +167,35 @@ def fert_recommend():
     n = nr - N
     p = pr - P
     k = kr - K
-    temp = {abs(n): "N", abs(p): "P", abs(k): "K"}
-    max_value = temp[max(temp.keys())]
-    if max_value == "N":
-        if n < 0:
-            key = 'NHigh'
-        else:
-            key = "Nlow"
-    elif max_value == "P":
-        if p < 0:
-            key = 'PHigh'
-        else:
-            key = "Plow"
-    else:
-        if k < 0:
-            key = 'KHigh'
-        else:
-            key = "Klow"
+    
+    key,key1,key2 = '','',''
+    if n < -5:
+        key += 'NHigh'
+    elif n > 5:
+        key += 'Nlow'
+    
 
-    response = Markup(str(fertilizer_dic[key]))
+    if p < -5:
+        key1 += 'PHigh'
+    elif p > 5:
+        key1 += "Plow"
+    
 
+    if k < -5:
+        key2 += 'KHigh'
+    elif k > 5:
+        key2 += "Klow"
+    
+    if len(key)==0 and len(key1)==0 and len(key2)==0:
+        return render_template('fertilizer-default.html',title=title)
+    
+    response = ''
+    if len(key) > 0:
+        response = response + Markup(str(fertilizer_dic[key]))
+    if len(key1) > 0:
+        response = response + Markup(str(fertilizer_dic[key1]))
+    if len(key2) > 0:
+        response = response + Markup(str(fertilizer_dic[key2]))
     return render_template('fertilizer-result.html', recommendation=response, title=title)
 
 # render disease prediction result page
