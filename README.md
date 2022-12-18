@@ -19,7 +19,7 @@ Crop diseases are a major threat to food security, but their rapid identificatio
  ●      Torch
  
 # Authors
- Kushagra Rastogi
- Shikhar Garg
- Abhay Garg
- Akhil Gupta
+ 1. Kushagra Rastogi
+ 2. Shikhar Garg
+ 3. Abhay Garg
+ 4. Akhil Gupta
